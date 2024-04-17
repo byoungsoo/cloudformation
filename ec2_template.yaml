@@ -26,8 +26,8 @@ Parameters:
     Type: String
     Default: "subnet-0b4076508ce121c27"
   VolumeSize:
-    Type: Integer
-    Default: 20
+    Type: String
+    Default: "20"
 
 
 Resources:
@@ -38,7 +38,7 @@ Resources:
       KeyName: !Ref 'KeyName'
       ImageId: !Ref 'LatestAmiId'
       SubnetId: !Ref 'SubnetId'
-      SecurityGroups: !Ref: 'SecurityGroups'
+      SecurityGroups: [ !Ref 'SecurityGroups' ]
       BlockDeviceMappings: 
       - DeviceName: "/dev/sda"
         Ebs: 
