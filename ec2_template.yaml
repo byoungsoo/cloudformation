@@ -40,7 +40,7 @@ Resources:
       SubnetId: !Ref 'SubnetId'
       SecurityGroups: [ !Ref 'SecurityGroups' ]
       BlockDeviceMappings: 
-      - DeviceName: "/dev/sda"
+      - DeviceName: "/dev/sda1"
         Ebs: 
           VolumeType: "gp3"
           DeleteOnTermination: "true"
