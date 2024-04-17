@@ -19,8 +19,8 @@ Parameters:
   InstanceType:
     Type: String
     Default: "t3.small"
-  SecurityGroupIds:
-    Type: CommaDelimitedList
+  SecurityGroups:
+    Type: String
     Default: "sg-080875f63ecb357d4"
   SubnetId:
     Type: String
@@ -38,7 +38,7 @@ Resources:
       KeyName: !Ref 'KeyName'
       ImageId: !Ref 'LatestAmiId'
       SubnetId: !Ref 'SubnetId'
-      SecurityGroupIds: [ !Ref: 'SecurityGroupIds' ]
+      SecurityGroups: !Ref: 'SecurityGroups'
       BlockDeviceMappings: 
       - DeviceName: "/dev/sda"
         Ebs: 
