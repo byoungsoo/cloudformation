@@ -1,4 +1,4 @@
-template-file-path: ./ec2_template.json
+template-file-path: ./ec2_template.yaml
 
 parameters: 
     KeyName: bys-console
