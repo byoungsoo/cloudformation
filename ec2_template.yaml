@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Metadata:
+  License: Apache-2.0
+Description: 'AWS CloudFormation Sample Template EC2InstanceWithSecurityGroupSample:
+  Create an Amazon EC2 instance running the Amazon Linux AMI. The AMI is chosen based
+  on the region in which the stack is run. This example creates an EC2 security group
+  for the instance to give you SSH access. **WARNING** This template creates an Amazon
+  EC2 instance. You will be billed for the AWS resources used if you create a stack
+  from this template.'
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+    Default: "bys-console"
+  LatestAmiId:
+    Type:  'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
+  InstanceType:
+    Type: String
+    Default: "t3.small"
+  SecurityGroupIds:
+    Type: CommaDelimitedList
+    Default: "sg-080875f63ecb357d4"
+  SubnetId:
+    Type: String
+    Default: "subnet-0b4076508ce121c27"
+  VolumeSize:
+    Type: Integer
+    Default: 20
+
+
+Resources:
+  MyEC2Instance: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      InstanceType: !Ref 'InstanceType'
+      KeyName: !Ref 'KeyName'
+      ImageId: !Ref 'LatestAmiId'
+      SubnetId: !Ref 'SubnetId'
+      SecurityGroupIds: [ !Ref: 'SecurityGroupIds' ]
+      BlockDeviceMappings: 
+      - DeviceName: "/dev/sda"
+        Ebs: 
+          VolumeType: "gp3"
+          DeleteOnTermination: "true"
+          VolumeSize: !Ref 'VolumeSize'

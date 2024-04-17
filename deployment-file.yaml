@@ -1,0 +1,8 @@
+template-file-path: ./ec2_template.json
+
+parameters: 
+    KeyName: bys-console
+    InstanceType: "m5.xlarge"
+tags:
+    Name: 'bys-dev-ec2-cfn-gitsync'
+    auto-delete: 'no'
